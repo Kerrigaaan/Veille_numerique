@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Veille IA en Médecine</title>
-</head>
-<body>
-    <h1>Articles sur l'IA en Médecine</h1>
-    <ul>
-        {% for article in articles %}
-            <li><a href="{{ article.url }}">{{ article.title }}</a> - {{ article.summary }}</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+    <h2>Bienvenue sur la veille numérique sur l'IA dans la médecine</h2>
+    <p>Ce site propose une veille sur les dernières avancées de l'IA dans le domaine médical.</p>
+    <p>Utilisez les boutons de navigation pour scraper, analyser et visualiser les données.</p>
+</section>
+{% endblock %}

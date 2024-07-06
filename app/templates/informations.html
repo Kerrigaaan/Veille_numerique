@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+    <h2>Informations</h2>
+    <ul>
+        {% if informations %}
+            {% for info in informations %}
+            <li>
+                <h3>{{ info.titre }}</h3>
+                <p>{{ info.description }}</p>
+                <a href="{{ info.url }}" target="_blank">Lire plus</a>
+                <p>Publié le: {{ info.date_publication }}</p>
+            </li>
+            {% endfor %}
+        {% else %}
+            <li>No information available</li>
+        {% endif %}
+    </ul>
+</section>
+{% endblock %}
+

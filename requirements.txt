@@ -2,6 +2,8 @@ fastapi
 uvicorn
 jinja2
 mysql-connector-python
-sqlalchemy
-beautifulsoup4
 requests
+beautifulsoup4
+numpy
+matplotlib
+scikit-learn
