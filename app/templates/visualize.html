@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+    <h2>Visualisation des Données</h2>
+    {% if not has_data %}
+    <div class="info-bubble">
+        <p>Aucune donnée disponible pour le moment.</p>
+    </div>
+    {% else %}
+    <h3>Graphique en secteurs</h3>
+    <img src="data:image/png;base64,{{ image_base64 }}" alt="Graphique en secteurs">
+    <h3>Graphique en barres</h3>
+    <img src="data:image/png;base64,{{ bar_chart_base64 }}" alt="Graphique en barres">
+    <h3>Distribution des dates de publication</h3>
+    <img src="data:image/png;base64,{{ date_distribution_chart_base64 }}" alt="Distribution des dates de publication">
+    <h3>Fréquence des mots-clés</h3>
+    <img src="data:image/png;base64,{{ keyword_frequency_chart_base64 }}" alt="Fréquence des mots-clés">
+    {% endif %}
+</section>
+{% endblock %}

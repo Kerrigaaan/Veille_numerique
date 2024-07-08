@@ -1,9 +1,10 @@
+anyio
+beautifulsoup4
 fastapi
-uvicorn
 jinja2
 mysql-connector-python
 requests
-beautifulsoup4
-numpy
+starlette
+uvicorn
 matplotlib
 scikit-learn

@@ -2,21 +2,24 @@
 
 {% block content %}
 <section>
-    <h2>Informations</h2>
+    <h2>Informations Scrappées</h2>
+    {% if not informations %}
+    <div class="info-bubble">
+        <p>Aucune donnée disponible pour le moment.</p>
+    </div>
+    {% else %}
     <ul>
-        {% if informations %}
-            {% for info in informations %}
-            <li>
-                <h3>{{ info.titre }}</h3>
-                <p>{{ info.description }}</p>
-                <a href="{{ info.url }}" target="_blank">Lire plus</a>
-                <p>Publié le: {{ info.date_publication }}</p>
-            </li>
-            {% endfor %}
-        {% else %}
-            <li>No information available</li>
-        {% endif %}
+        {% for info in informations %}
+        <li>
+            <h3>{{ info.titre }}</h3>
+            <p>{{ info.description }}</p>
+            <a href="{{ info.url }}">Lire plus</a>
+            <p><small>Publié le: {{ info.date_publication }}</small></p>
+        </li>
+        {% endfor %}
     </ul>
+    {% endif %}
 </section>
 {% endblock %}
+
 

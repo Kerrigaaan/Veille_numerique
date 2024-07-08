@@ -1,3 +1,5 @@
+from datetime import datetime
+
 def clean_informations(informations):
     cleaned_informations = []
     seen_titles = set()
@@ -13,8 +15,15 @@ def clean_informations(informations):
 
 def correct_errors(text):
     # Correction des fautes de frappe et des incohérences
-    return text
+    corrected_text = text.replace("l'IA", "l’intelligence artificielle")
+    # Ajoutez d'autres corrections si nécessaire
+    return corrected_text
 
 def normalize_date(date):
     # Uniformisation des formats de date
-    return date
+    if isinstance(date, str):
+        normalized_date = datetime.strptime(date, "%Y-%m-%d").date()
+    else:
+        normalized_date = date
+    return normalized_date
+

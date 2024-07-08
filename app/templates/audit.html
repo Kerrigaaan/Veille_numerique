@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+    <h2>Audit des Données</h2>
+    <p>Voici les résultats de l'audit des données scrappées :</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description Valide</th>
+                <th>URL Valide</th>
+                <th>Date Valide</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in audit_results %}
+            <tr>
+                <td>{{ result.titre }}</td>
+                <td>{{ 'Oui' if result.description_valid else 'Non' }}</td>
+                <td>{{ 'Oui' if result.url_valid else 'Non' }}</td>
+                <td>{{ 'Oui' if result.date_valid else 'Non' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

@@ -5,5 +5,13 @@
     <h2>Bienvenue sur la veille numérique sur l'IA dans la médecine</h2>
     <p>Ce site propose une veille sur les dernières avancées de l'IA dans le domaine médical.</p>
     <p>Utilisez les boutons de navigation pour scraper, analyser et visualiser les données.</p>
+
+    <h3>Ajouter une URL à scraper</h3>
+    <form action="/add_url" method="post">
+        <label for="url">URL:</label>
+        <input type="url" id="url" name="url" required>
+        <button type="submit">Ajouter</button>
+    </form>
 </section>
 {% endblock %}
+

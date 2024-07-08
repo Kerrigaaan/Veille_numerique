@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+    <h2>Analyse des Informations</h2>
+    <p><strong>Nombre total d'articles :</strong> {{ analysis.total_articles }}</p>
+    <p><strong>Longueur moyenne des descriptions :</strong> {{ analysis.mean_description_length }}</p>
+    <p><strong>Longueur médiane des descriptions :</strong> {{ analysis.median_description_length }}</p>
+    <p><strong>Écart-type des longueurs de description :</strong> {{ analysis.std_description_length }}</p>
+    <h3>Articles par mois</h3>
+    <ul>
+        {% for month, count in analysis.articles_per_month.items() %}
+        <li>{{ month }} : {{ count }} articles</li>
+        {% endfor %}
+    </ul>
+    <h3>Fréquence des mots-clés</h3>
+    <ul>
+        {% for keyword, count in analysis.keyword_frequency.items() %}
+        <li>{{ keyword }} : {{ count }} occurrences</li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}
+
