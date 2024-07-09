@@ -4,6 +4,17 @@
 <section>
     <h2>Bienvenue sur l'outil de veille IA en médecine</h2>
     <p>Cette application permet de scraper des informations sur l'IA dans le domaine médical.</p>
+    
+    <h3>Fonctionnalités de l'application</h3>
+    <ul>
+        <li><strong>Accueil :</strong> Où vous pouvez ajouter des URL à scraper et voir la liste des sites à scraper.</li>
+        <li><strong>Informations :</strong> Affiche les informations scrappées à partir des sites listés. Vous pouvez voir les articles collectés et leurs descriptions.</li>
+        <li><strong>Scraper :</strong> Lance le processus de scraping pour collecter les dernières informations des sites ajoutés. Les résultats du scraping sont ensuite stockés et affichés.</li>
+        <li><strong>Analyser :</strong> Affiche des statistiques et des analyses des informations collectées, comme la longueur moyenne des descriptions et la fréquence des mots-clés.</li>
+        <li><strong>Visualiser :</strong> Génère et affiche des graphiques basés sur les informations collectées, comme des graphiques en secteurs et en barres.</li>
+        <li><strong>Auditer :</strong> Permet de réaliser des audits pour vérifier l'exactitude et la fiabilité des données collectées.</li>
+    </ul>
+ 
     <h3>Ajouter une URL à scraper</h3>
     <form method="post" action="/add_url">
         <input type="text" name="url" placeholder="Entrez l'URL ici" required>
@@ -14,12 +25,17 @@
         <p>{{ message }}</p>
     </div>
     {% endif %}
-    <h3>Liste des URL à scraper</h3>
-    <ul>
-        {% for url in urls_to_scrape %}
-        <li>{{ url }}</li>
+
+    <h3>Liste des sites à scraper</h3>
+    <select class="styled-select">
+        {% for site in site_names %}
+        <option>{{ site }}</option>
         {% endfor %}
-    </ul>
+    </select>
+    
+    
 </section>
 {% endblock %}
+
+
 

@@ -11,6 +11,7 @@ from app.modeling import cluster_informations
 from app.reporting import generate_report, send_alerts
 from app.monitoring import monitor_sources
 from app.evaluation import collect_feedback, audit_data
+from urllib.parse import urlparse
 
 app = FastAPI()
 templates = Jinja2Templates(directory="app/templates")
@@ -38,14 +39,20 @@ def truncate_text(text, max_length=200):
         return text[:max_length] + "..."
     return text
 
+def extract_site_name(url):
+    parsed_url = urlparse(url)
+    return parsed_url.netloc
+
 @app.get("/")
 def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "urls_to_scrape": urls_to_scrape})
+    site_names = [extract_site_name(url) for url in urls_to_scrape]
+    return templates.TemplateResponse("index.html", {"request": request, "site_names": site_names})
 
 @app.post("/add_url")
 def add_url(request: Request, url: str = Form(...)):
     urls_to_scrape.append(url)
-    return templates.TemplateResponse("index.html", {"request": request, "urls_to_scrape": urls_to_scrape, "message": "URL ajoutée avec succès!"})
+    site_names = [extract_site_name(url) for url in urls_to_scrape]
+    return templates.TemplateResponse("index.html", {"request": request, "site_names": site_names, "message": "URL ajoutée avec succès!"})
 
 @app.get("/informations")
 def read_informations(request: Request):
@@ -57,7 +64,7 @@ def read_informations(request: Request):
     cursor.execute("SELECT * FROM informations")
     informations = cursor.fetchall()
     for info in informations:
-        info['description'] = truncate_text(info['description'])
+        info['description'] = truncate_text(info['description'])  
     print(f"Fetched {len(informations)} informations from the database")
     conn.close()
     return templates.TemplateResponse("informations.html", {"request": request, "informations": informations})
@@ -106,7 +113,7 @@ def analyze_data(request: Request):
     informations = cursor.fetchall()
     conn.close()
     
-    informations = transform_informations(informations)
+    informations = transform_informations(informations) 
     analysis = analyze_informations(informations)
     return templates.TemplateResponse("analyze.html", {"request": request, "analysis": analysis})
 
@@ -124,7 +131,7 @@ def visualize_data(request: Request):
     if not informations:
         return templates.TemplateResponse("visualize.html", {"request": request, "has_data": False})
     
-    informations = transform_informations(informations)
+    informations = transform_informations(informations)  # Transformer les données avant la visualisation
     
     image_base64 = visualize_informations(informations)
     bar_chart_base64 = create_bar_chart(informations)
