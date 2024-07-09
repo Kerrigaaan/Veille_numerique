@@ -40,12 +40,12 @@ def truncate_text(text, max_length=200):
 
 @app.get("/")
 def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request, "urls_to_scrape": urls_to_scrape})
 
 @app.post("/add_url")
 def add_url(request: Request, url: str = Form(...)):
     urls_to_scrape.append(url)
-    return templates.TemplateResponse("index.html", {"request": request, "message": "URL ajoutée avec succès!"})
+    return templates.TemplateResponse("index.html", {"request": request, "urls_to_scrape": urls_to_scrape, "message": "URL ajoutée avec succès!"})
 
 @app.get("/informations")
 def read_informations(request: Request):

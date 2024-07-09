@@ -2,16 +2,24 @@
 
 {% block content %}
 <section>
-    <h2>Bienvenue sur la veille numérique sur l'IA dans la médecine</h2>
-    <p>Ce site propose une veille sur les dernières avancées de l'IA dans le domaine médical.</p>
-    <p>Utilisez les boutons de navigation pour scraper, analyser et visualiser les données.</p>
-
+    <h2>Bienvenue sur l'outil de veille IA en médecine</h2>
+    <p>Cette application permet de scraper des informations sur l'IA dans le domaine médical.</p>
     <h3>Ajouter une URL à scraper</h3>
-    <form action="/add_url" method="post">
-        <label for="url">URL:</label>
-        <input type="url" id="url" name="url" required>
-        <button type="submit">Ajouter</button>
+    <form method="post" action="/add_url">
+        <input type="text" name="url" placeholder="Entrez l'URL ici" required>
+        <button type="submit">Ajouter URL</button>
     </form>
+    {% if message %}
+    <div class="info-bubble">
+        <p>{{ message }}</p>
+    </div>
+    {% endif %}
+    <h3>Liste des URL à scraper</h3>
+    <ul>
+        {% for url in urls_to_scrape %}
+        <li>{{ url }}</li>
+        {% endfor %}
+    </ul>
 </section>
 {% endblock %}
 
